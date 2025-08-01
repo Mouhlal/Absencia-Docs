@@ -68,3 +68,4 @@ class MatieresController extends Controller
         return response()->json(null, 204);
     }
 }
+

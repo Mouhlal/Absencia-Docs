@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Groupes;
 use Illuminate\Http\Request;
 
 class GroupesController extends Controller
@@ -12,7 +13,8 @@ class GroupesController extends Controller
      */
     public function index()
     {
-        //
+        $groupes = Groupes::all();
+        return response()->json($groupes);
     }
 
     /**
@@ -20,7 +22,13 @@ class GroupesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'nv_scolaires' => 'required|integer',
+        ]);
+
+        $groupe = Groupes::create($request->all());
+        return response()->json($groupe, 201);
     }
 
     /**
@@ -28,7 +36,8 @@ class GroupesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $groupe = Groupes::findOrFail($id);
+        return response()->json($groupe);
     }
 
     /**
@@ -36,7 +45,14 @@ class GroupesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'nullable|string|max:255',
+            'nv_scolaires' => 'nullable|integer',
+        ]);
+
+        $groupe = Groupes::findOrFail($id);
+        $groupe->update($request->all());
+        return response()->json($groupe);
     }
 
     /**
@@ -44,6 +60,8 @@ class GroupesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $groupe = Groupes::findOrFail($id);
+        $groupe->delete();
+        return response()->json(null, 204);
     }
 }
