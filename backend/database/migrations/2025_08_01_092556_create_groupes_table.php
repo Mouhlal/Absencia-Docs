@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('groupes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nv_scolaires')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

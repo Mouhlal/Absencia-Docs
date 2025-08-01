@@ -12,7 +12,7 @@ class Groupes extends Model
 
     protected $fillable = [
         'name',
-        'nv_scolaires',
+        'nv_scolaires_id',
     ];
     /**
      * Get the users associated with the group.

@@ -11,7 +11,7 @@ class Matieres extends Model
     use HasFactory , SoftDeletes ;
     protected $fillable = [
         'name',
-        'nv_scolaires',
+        'nv_scolaires_id',
         'description',
     ];
     /**

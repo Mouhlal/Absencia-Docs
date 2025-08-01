@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matieres', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('matieres', function (Blueprint $table) {
+            $table->foreignId('nv_scolaires_id')
+                ->constrained('nv_scolaires')
+                ->onDelete('cascade');
         });
     }
 
@@ -25,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matieres');
+        Schema::table('matieres', function (Blueprint $table) {
+          
+        });
     }
 };
